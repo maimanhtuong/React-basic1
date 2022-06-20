@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { STAFFS,DEPARTMENTS } from "./staffs.jsx";
 import { Card, CardTitle, CardBody,CardHeader } from "reactstrap";
-
+import dateFormat from "dateformat";
 class Staff extends Component {
   constructor() {
     super();
@@ -14,8 +14,8 @@ class Staff extends Component {
         <Card>
           <CardBody>
             <CardTitle>Họ và tên: <h3>{staff.name}</h3></CardTitle>
-            <CardTitle>Ngày sinh: {staff.doB}</CardTitle>
-            <CardTitle>Ngày vào công ty: {staff.startDate}</CardTitle>
+            <CardTitle>Ngày sinh: {dateFormat(staff.doB,"dd,mm,yyyy")}</CardTitle>
+            <CardTitle>Ngày vào công ty: {dateFormat(staff.startDate,"dd,mm,yyyy")}</CardTitle>
             <CardTitle>Phòng ban: {staff.department.name}</CardTitle>
             <CardTitle>Số ngày nghĩ còn lại: {staff.annualLeave}</CardTitle>
             <CardTitle>Số ngày đã làm thêm: {staff.overTime}</CardTitle>
@@ -42,7 +42,7 @@ class Staff extends Component {
           <div className="row">
             {staff}
             </div>
-          Nhấp vào để xem chi tiết nhân viên
+         <h3> Nhấp vào để xem chi tiết nhân viên</h3>
           {this.state.detail}
         </div>
       </>
