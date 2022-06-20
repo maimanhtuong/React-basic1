@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { STAFFS } from "./staffs.jsx";
-import { Card, CardTitle, CardBody } from "reactstrap";
+import { STAFFS,DEPARTMENTS } from "./staffs.jsx";
+import { Card, CardTitle, CardBody,CardHeader } from "reactstrap";
 
 class Staff extends Component {
   constructor() {
@@ -13,8 +13,12 @@ class Staff extends Component {
       detail: (
         <Card>
           <CardBody>
-            <CardTitle>{staff.id}</CardTitle>
-            <CardTitle>{staff.name}</CardTitle>
+            <CardTitle>Họ và tên: <h3>{staff.name}</h3></CardTitle>
+            <CardTitle>Ngày sinh: {staff.doB}</CardTitle>
+            <CardTitle>Ngày vào công ty: {staff.startDate}</CardTitle>
+            <CardTitle>Phòng ban: {staff.department.name}</CardTitle>
+            <CardTitle>Số ngày nghĩ còn lại: {staff.annualLeave}</CardTitle>
+            <CardTitle>Số ngày đã làm thêm: {staff.overTime}</CardTitle>
           </CardBody>
         </Card>
       ),
