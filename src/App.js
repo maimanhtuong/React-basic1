@@ -3,7 +3,7 @@ import Menu from './components/MenuComponent'
 function App() {
   return (
     <div className="App">
-      <Menu></Menu>
+      <Menu color='red'></Menu>
     </div>
   );
 }
