@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { STAFFS } from "./staffs.jsx";
 import { Card, CardTitle, CardBody } from "reactstrap";
 
-class Menu extends Component {
+class Staff extends Component {
   constructor() {
     super();
     this.state = { staffs: STAFFS, detail: null };
@@ -46,4 +46,4 @@ class Menu extends Component {
   }
 }
 
-export default Menu;
+export default Staff;

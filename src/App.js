@@ -1,9 +1,9 @@
 import './App.css';
-import Menu from './components/MenuComponent'
+import Staff from './components/StaffComponent';
 function App() {
   return (
     <div className="App">
-      <Menu color='red'></Menu>
+      <Staff ></Staff>
     </div>
   );
 }
