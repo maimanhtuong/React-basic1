@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { STAFFS } from "./staffs.jsx";
+import { STAFFS } from "./data/staffs";
 import {
   Card,
   CardTitle,
