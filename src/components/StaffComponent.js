@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import dateFormat from "dateformat";
 import { STAFFS } from "./data/staffs";
 import {
   Card,
@@ -14,7 +15,6 @@ import {
   DropdownToggle,
 } from "reactstrap";
 
-import dateFormat from "dateformat";
 class Staff extends Component {
   constructor() {
     super();
