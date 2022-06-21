@@ -1,17 +1,7 @@
 import React, { Component } from "react";
 import { STAFFS } from "./data/staffs";
 import {
-  Card,
-  CardTitle,
-  CardBody,
-  Navbar,
-  NavbarBrand,
-  Collapse,
-  Nav,
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle,
+  
 } from "reactstrap";
 
 import dateFormat from "dateformat";
