@@ -4,17 +4,19 @@ import { Routes,Route,Navigate,useParams } from "react-router-dom"
 
 
 
-import { STAFFS } from "../data/staffs";
+import { STAFFS,DEPARTMENTS } from "../data/staffs";
 import Header from "./Header";
 import StaffList from "./StaffList";
 import StaffDetail from "./StaffDetail";
+import DepartmentList from "./DepartmentList";
+import SalaryList from "./SalaryList";
 import Footer from "./Footer";
 
 
 class Main extends Component {
   constructor() {
     super();
-    this.state = { staffs: STAFFS, detail: null, columns: "col-sm-4" };
+    this.state = { staffs: STAFFS,departments:DEPARTMENTS ,detail: null, columns: "col-sm-4" };
   }
 
  
@@ -45,9 +47,11 @@ class Main extends Component {
         <div className="container">
           <Header/>
           <Routes>
-            <Route path='*' element={<Navigate to='/StaffList'/>}/>
-            <Route path='StaffList/:id' element={<StaffWithId />}/>
             <Route exact path='StaffList' element={<StaffList staffs={this.state.staffs} />}/>
+            <Route path='StaffList/:id' element={<StaffWithId />}/>
+            <Route path='DepartmentList' element={<DepartmentList staffs={this.state.departments} />}/>
+            <Route path='SalaryList' element={<SalaryList staffs={this.state.staffs} />}/>
+            <Route path='*' element={<Navigate to='/StaffList'/>}/>
           </Routes>
           <Footer/>
         </div>

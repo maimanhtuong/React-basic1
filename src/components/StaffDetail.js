@@ -1,22 +1,25 @@
 import React, { Component } from "react";
 import {
-  Card,
   CardTitle,
   CardBody,
   CardImg,
-  Navbar,
-  NavbarBrand,
-  Collapse,
-  Nav,
-  UncontrolledDropdown,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle,
+  Breadcrumb,
+  BreadcrumbItem,
 } from "reactstrap";
+import {Link} from 'react-router-dom'
 import dateFormat from "dateformat";
 
 function StaffDetail(props){
 return (
+  <>
+    <div>
+    <Breadcrumb>
+            <BreadcrumbItem>
+              <Link to="/">Nhân viên</Link>
+            </BreadcrumbItem>
+            <BreadcrumbItem active>{props.staff.name}</BreadcrumbItem>
+          </Breadcrumb>
+    </div>
     <div className="row">
     <div className='col-4'>
   <CardImg src={props.staff.image} width="200px" height="300px"/>
@@ -38,6 +41,7 @@ return (
   </CardBody>
   </div>
 </div>
+  </>
 )
 }
 export default StaffDetail;
