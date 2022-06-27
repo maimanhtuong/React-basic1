@@ -2,38 +2,23 @@ import React, { Component } from 'react';
 import { Card,CardImg,CardTitle, CardImgOverlay, Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-class Menu extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          selectedDish:null
-        };
-    }
-    
-    
-    
-    render() {
-      function RenderMenuItem ({dish, onClick}) {
-        return (
-            <Card>
-                <Link to={`/menu/${dish.id}`} >
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />
-                    <CardImgOverlay>
-                        <CardTitle>{dish.name}</CardTitle>
-                    </CardImgOverlay>
-                </Link>
-            </Card>
-        );
-    }
-      const menu = this.props.dishes.map((dish) => {
+function RenderMenuItem ({dish, onClick}) {
+  return (
+      <Card>
+          <Link to={`/menu/${dish.id}`} >
+              <CardImg width="100%" src={dish.image} alt={dish.name} />
+              <CardImgOverlay>
+                  <CardTitle>{dish.name}</CardTitle>
+              </CardImgOverlay>
+          </Link>
+      </Card>
+  );
+}
+const Menu = (props) => {
+      const menu = props.dishes.map((dish) => {
             return (
               <div key={dish.id} className="col-12 col-md-5 m-1">
-                <Card onClick={()=>this.props.onClick(dish.id)}>
-                  <CardImg width="100%" object src={dish.image} alt={dish.name} />
-                  <CardImgOverlay>
-                    <CardTitle >{dish.name}</CardTitle>
-                  </CardImgOverlay>
-                </Card>
+                <RenderMenuItem dish={dish} />
               </div>
             );
         });
@@ -56,6 +41,6 @@ class Menu extends Component {
       </div>
         );
     }
-}
+
 
 export default Menu;
