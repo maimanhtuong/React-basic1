@@ -1,10 +1,13 @@
 import './App.css';
-import Staff from './components/StaffComponent';
+import Main from './components/Main';
+import {BrowserRouter} from 'react-router-dom'
 function App() {
   return (
+    <BrowserRouter>
     <div className="App">
-      <Staff ></Staff>
+      <Main ></Main>
     </div>
+    </BrowserRouter>
   );
 }
 
