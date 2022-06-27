@@ -9,10 +9,9 @@ import About from './AboutUsComponent';
 import { COMMENTS } from '../shared/comments';
 import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
-import { Routes,Route,Navigate} from 'react-router-dom';
+import { Routes,Route,Navigate,useParams} from 'react-router-dom';
 import DishDetail from './DishDetailComponent';
 
-import { useParams } from 'react-router-dom';
   
 
 class Main extends Component{
