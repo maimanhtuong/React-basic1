@@ -52,9 +52,11 @@ function StaffList(props) {
   function search(e) {
     e.preventDefault();
     const search = e.target.value.toLowerCase();
+    console.log(search);
     let staffs = props.staffs.filter((staff) => {
       return staff.name.toLowerCase().includes(search);
     });
+    console.log(staffs);
 
     setLocalStaffs(staffs);
   }
