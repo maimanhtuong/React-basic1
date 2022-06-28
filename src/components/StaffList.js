@@ -39,7 +39,7 @@ function StaffList(props) {
       <Card key={staff.id} className="col-sm-4">
         <Link to={`${staff.id}`}>
           <CardBody>
-            <CardImg src={staff.image}></CardImg>
+            <CardImg src={staff.image} height="300px"></CardImg>
             <CardTitle tag="h5">{staff.name}</CardTitle>
             <CardTitle tag="h6">{staff.id+1}</CardTitle>
             <CardTitle tag="h6">{staff.department.name}</CardTitle>
