@@ -35,8 +35,6 @@ class Main extends Component {
     // }
     const StaffWithId=()=> {
       const Id= useParams().id;
-      console.log(Id);
-      console.log(STAFFS);
       return (
         <StaffDetail staff={this.state.staffs.filter(staff => staff.id === parseInt(Id))[0]} />
       ) ;
