@@ -34,17 +34,6 @@ export const STAFFS =
     [
         {
             id: 0,
-            name: "Nguyễn Văn A",
-            doB: "1999-01-01T08:59:00.000Z",
-            salaryScale: 1.1,
-            startDate: "2019-04-30T08:59:00.000Z",
-            department: DEPARTMENTS[0],
-            annualLeave: 1,
-            overTime: 1,
-            image: '/assets/images/alberto.png',
-        },
-        {
-            id: 1,
             name: "Nguyễn Văn B",
             doB: "2000-01-01T08:59:00.000Z",
             salaryScale: 1.2,
@@ -55,8 +44,19 @@ export const STAFFS =
             image: '/assets/images/alberto.png',
         },
         {
+            id: 1,
+            name: "Nguyễn Văn A",
+            doB: "1999-01-01T08:59:00.000Z",
+            salaryScale: 1.1,
+            startDate: "2019-04-30T08:59:00.000Z",
+            department: DEPARTMENTS[0],
+            annualLeave: 1,
+            overTime: 1,
+            image: '/assets/images/alberto.png',
+        },
+        {
             id: 2,
-            name: "Nguyễn Văn C",
+            name: "Nguyễn Văn D",
             doB: "2001-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -67,7 +67,7 @@ export const STAFFS =
         },
         {
             id: 3,
-            name: "Nguyễn Văn D",
+            name: "Nguyễn Văn C",
             doB: "2002-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -77,8 +77,8 @@ export const STAFFS =
             image: '/assets/images/alberto.png',
         },
         {
-            id: 4,
-            name: "Nguyễn Văn E",
+            id: 7,
+            name: "Nguyễn Văn F",
             doB: "1999-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -89,7 +89,7 @@ export const STAFFS =
         },
         {
             id: 5,
-            name: "Nguyễn Văn F",
+            name: "Nguyễn Văn E",
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -110,7 +110,7 @@ export const STAFFS =
             image: '/assets/images/alberto.png',
         },
         {
-            id: 7,
+            id: 4,
             name: "Nguyễn Văn F",
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,

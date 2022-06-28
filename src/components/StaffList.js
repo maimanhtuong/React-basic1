@@ -16,14 +16,33 @@ import {
 
 function StaffList(props) {
   const [LocalStaffs, setLocalStaffs] = useState(props.staffs);
+  const [sortedField, setSortedField] = useState(null);
+  
+  let sortedProduct = LocalStaffs;
+  if(sortedField !== null){
+    sortedProduct = LocalStaffs.sort((a, b) => {
+      if(sortedField === "id"){
+        return a.id - b.id;
+      }
+      if(sortedField === "name"){
+        return a.name.localeCompare(b.name);
+      }
+      if(sortedField === "department"){
+        return a.department.name.localeCompare(b.department.name);
+      }
+    }
+    );
+  }
 
-  const staffs = LocalStaffs.map((staff) => {
+  const staffs = sortedProduct.map((staff) => {
     return (
       <Card key={staff.id} className="col-sm-4">
         <Link to={`${staff.id}`}>
           <CardBody>
             <CardImg src={staff.image}></CardImg>
             <CardTitle tag="h5">{staff.name}</CardTitle>
+            <CardTitle tag="h6">{staff.id+1}</CardTitle>
+            <CardTitle tag="h6">{staff.department.name}</CardTitle>
           </CardBody>
         </Link>
       </Card>
@@ -39,21 +58,8 @@ function StaffList(props) {
 
     setLocalStaffs(staffs);
   }
-  function sortName(str) {
-    if (str === "asc") {
-      console.log("asc");
-      setLocalStaffs(
-        [...props.staffs].sort((a, b) => {
-          return a.name-b.name;
-        })
-      );
-    } else {
-      console.log("desc");
-      setLocalStaffs([...props.staffs].sort((a, b) => {
-        return b.name-a.name;
-      }));
-    }
-  }
+
+ 
   return (
     <>
       <Navbar color="info" expand="md" light>
@@ -61,14 +67,17 @@ function StaffList(props) {
           <Nav className="me-auto" navbar>
             <UncontrolledDropdown inNavbar nav>
               <DropdownToggle caret nav>
-               Sắp xếp tên
+               Sắp xếp theo
               </DropdownToggle>
               <DropdownMenu end>
-                <DropdownItem onClick={() => sortName("asc")}>
-                  Name ASC
+                <DropdownItem onClick={() => setSortedField('id')}>
+                  Id
                 </DropdownItem>
-                <DropdownItem onClick={() => sortName("desc")}>
-                  Name DESC
+                <DropdownItem onClick={() => setSortedField('name')}>
+                  Name 
+                </DropdownItem>
+                <DropdownItem onClick={() => setSortedField('department')}>
+                  Department 
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

@@ -76,7 +76,7 @@ function StaffList(props) {
               <Nav className="me-auto" navbar>
                 <UncontrolledDropdown inNavbar nav>
                   <DropdownToggle caret nav>
-                    Số cột hiển thị
+                    Sắp xếp Id
                   </DropdownToggle>
                   <DropdownMenu end>
                     <DropdownItem onClick={() => sortId("asc")}>
