@@ -47,10 +47,7 @@ function Footer() {
               <h6 class="text-uppercase font-weight-bold mb-4">
                 Registered Office Address
               </h6>
-              <p class="text-muted mb-4">
-                Here , write the complete address of the Registered office
-                address along with telephone number.
-              </p>
+              
              
             </div>
           </div>

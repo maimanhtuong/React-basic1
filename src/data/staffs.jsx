@@ -100,7 +100,7 @@ export const STAFFS =
         },
         {
             id: 6,
-            name: "Nguyễn Văn F",
+            name: "Nguyễn Văn G",
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -111,7 +111,7 @@ export const STAFFS =
         },
         {
             id: 4,
-            name: "Nguyễn Văn F",
+            name: "Nguyễn Văn H",
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
