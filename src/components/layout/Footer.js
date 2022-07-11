@@ -42,8 +42,8 @@ function Footer() {
             </address>
           </div>
           <div className="col-4 ">
-            <div class="col-lg-4 col-md-6 mb-lg-0">
-              <h6 class="text-uppercase font-weight-bold mb-4">
+            <div className="col-lg-4 col-md-6 mb-lg-0">
+              <h6 className="text-uppercase font-weight-bold mb-4">
                 Registered Office Address
               </h6>
               

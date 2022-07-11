@@ -10,6 +10,8 @@ import {Link} from 'react-router-dom'
 import dateFormat from "dateformat";
 
 function StaffDetail(props){
+  const staff = props.staff;
+  console.log(typeof((staff.department)));
 return (
   <>
     <div>

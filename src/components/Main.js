@@ -1,61 +1,66 @@
-import React, { Component } from "react";
-import { Routes,Route,Navigate,useParams } from "react-router-dom"
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+
+import Header from "./layout/Header";
+import StaffList from "./Staffs/StaffList";
+import StaffDetail from "./Staffs/StaffDetail"
+import DepartmentList from "./Department/DepartmentList";
+import SalaryList from "./Salary/SalaryList";
+import Footer from "./layout/Footer";
+
+import { useSelector} from "react-redux";
 
 
-
-
-import { STAFFS,DEPARTMENTS } from "../data/staffs";
-import Header from "./Header";
-import StaffList from "./StaffList";
-import StaffDetail from "./StaffDetail";
-import DepartmentList from "./DepartmentList";
-import SalaryList from "./SalaryList";
-import Footer from "./Footer";
-
-
-class Main extends Component {
-  constructor() {
-    super();
-    this.state = { staffs: STAFFS,departments:DEPARTMENTS ,detail: null, columns: "col-sm-4" };
-  }
-
- 
-    
+function Main() {
   
- 
+  // const STORE = useSelector((state) => state.store);
+  // const [staffs,setStaff] = useState(STORE.staffs);
+  
+  // const [departments,setDepartment] = useState(STORE.departments);
 
-  render() {
-    
-    // function StaffWithId() {
-    //   const Id= useParams().id;
-     
-    //   return (
-    //     <StaffDetail staff={this.state.staffs.filter(staff => staff.id === parseInt(Id))[0]} />
-    //   ) ;
-    // }
-    const StaffWithId=()=> {
-      const Id= useParams().id;
+  const STAFFS= useSelector((state) => state.store.staffs);
+  console.log({STAFFS});
+  const DEPARTMENTS= useSelector((state) => state.store.departments);
+
+ 
+  
+    const StaffWithId = () => {
+      const Id = useParams().id;
       return (
-        <StaffDetail staff={this.state.staffs.filter(staff => staff.id === parseInt(Id))[0]} />
-      ) ;
-    }
+        <StaffDetail
+          staff={
+            STAFFS.filter((staff) => staff.id == parseInt(Id))[0]
+          }
+        />
+      );
+    };
 
     return (
       <>
         <div className="container">
-          <Header/>
+          <Header />
           <Routes>
-            <Route exact path='StaffList' element={<StaffList staffs={this.state.staffs} />}/>
-            <Route path='StaffList/:id' element={<StaffWithId />}/>
-            <Route path='DepartmentList' element={<DepartmentList staffs={this.state.departments} />}/>
-            <Route path='SalaryList' element={<SalaryList staffs={this.state.staffs} />}/>
-            <Route path='*' element={<Navigate to='/StaffList'/>}/>
+            <Route
+              exact
+              path="StaffList"
+              element={<StaffList staffs={STAFFS} departments={DEPARTMENTS} />}
+            />
+            <Route path="StaffList/:id" element={<StaffWithId />} />
+            <Route
+              path="DepartmentList"
+              element={<DepartmentList staffs={DEPARTMENTS} />}
+            />
+            <Route
+              path="SalaryList"
+              element={<SalaryList staffs={STAFFS} />}
+            />
+            <Route path="*" element={<Navigate to="/StaffList" />} />
           </Routes>
-          <Footer/>
+          <Footer />
         </div>
       </>
     );
   }
-}
+
 
 export default Main;
