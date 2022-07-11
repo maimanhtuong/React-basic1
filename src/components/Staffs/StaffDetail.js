@@ -10,8 +10,6 @@ import {Link} from 'react-router-dom'
 import dateFormat from "dateformat";
 
 function StaffDetail(props){
-  const staff = props.staff;
-  console.log(typeof((staff.department)));
 return (
   <>
     <div>
@@ -37,7 +35,7 @@ return (
     <CardTitle>
       Ngày vào công ty: {dateFormat(props.staff.startDate, "dd,mm,yyyy")}
     </CardTitle>
-    <CardTitle>Phòng ban: {props.staff.department.name}</CardTitle>
+    <CardTitle>Phòng ban: {JSON.parse(props.staff.department).name}</CardTitle>
     <CardTitle>Số ngày nghĩ còn lại: {props.staff.annualLeave}</CardTitle>
     <CardTitle>Số ngày đã làm thêm: {props.staff.overTime}</CardTitle>
   </CardBody>

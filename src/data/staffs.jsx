@@ -34,7 +34,7 @@ export const STAFFS =
     [
         {
             id: 0,
-            name: "Nguyễn Văn B",
+            name: "Nguyễn Văn A",
             doB: "2000-01-01T08:59:00.000Z",
             salaryScale: 1.2,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -45,7 +45,7 @@ export const STAFFS =
         },
         {
             id: 1,
-            name: "Nguyễn Văn A",
+            name: "Nguyễn Văn B",
             doB: "1999-01-01T08:59:00.000Z",
             salaryScale: 1.1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -56,7 +56,7 @@ export const STAFFS =
         },
         {
             id: 2,
-            name: "Nguyễn Văn D",
+            name: "Nguyễn Văn C",
             doB: "2001-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -67,7 +67,7 @@ export const STAFFS =
         },
         {
             id: 3,
-            name: "Nguyễn Văn C",
+            name: "Nguyễn Văn D",
             doB: "2002-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -78,7 +78,7 @@ export const STAFFS =
         },
         {
             id: 7,
-            name: "Nguyễn Văn F",
+            name: "Nguyễn Văn E",
             doB: "1999-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -89,7 +89,7 @@ export const STAFFS =
         },
         {
             id: 5,
-            name: "Nguyễn Văn E",
+            name: "Nguyễn Văn F",
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",
@@ -100,7 +100,7 @@ export const STAFFS =
         },
         {
             id: 6,
-            name: "Nguyễn Văn I",
+            name: "Nguyễn Văn G",
             doB: "2003-01-01T08:59:00.000Z",
             salaryScale: 1,
             startDate: "2019-04-30T08:59:00.000Z",

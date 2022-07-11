@@ -9,6 +9,7 @@ import SalaryList from "./Salary/SalaryList";
 import Footer from "./layout/Footer";
 
 import { useSelector} from "react-redux";
+import { staffsSelector,departmentSelector, searchSelector, staffsRemainingSelector} from '../redux/selector'
 
 
 function Main() {
@@ -18,9 +19,8 @@ function Main() {
   
   // const [departments,setDepartment] = useState(STORE.departments);
 
-  const STAFFS= useSelector((state) => state.store.staffs);
-  console.log({STAFFS});
-  const DEPARTMENTS= useSelector((state) => state.store.departments);
+  const STAFFS = useSelector(staffsRemainingSelector);
+  const DEPARTMENTS = useSelector(departmentSelector);
 
  
   

@@ -5,29 +5,23 @@ import {
   CardBody,
   CardImg,
   CardTitle,
-  DropdownMenu,
-  DropdownItem,
-  DropdownToggle,
-  UncontrolledDropdown,
-  Nav,
   Navbar,
   Collapse,
 } from "reactstrap";
 import { Formik, Form } from "formik";
 import Modal from "react-modal";
 import * as Yup from "yup";
-import { v4 as uuidv4 } from "uuid";
 import { useSelector, useDispatch } from "react-redux";
 import { TextField, SelectField, DateField } from "./ListField";
 import rootReducer from "../../redux/rootReducer";
 
 function StaffList(props) {
   const [openModal, setOpenModal] = useState(false);
-
+  
   const dispatch = useDispatch();
  
  
-  const staffs = props.staffs.map((staff) => {
+  const staff = props.staffs.map((staff) => {
     return (
       <Card key={staff.id} className="col-sm-4">
         <Link to={`${staff.id}`}>
@@ -90,12 +84,14 @@ function StaffList(props) {
                   doB: values.doB,
                   salaryScale: values.salaryScale,
                   startDate:values.startDate ,
-                  department: JSON.parse(values.department),
+                  department: (values.department),
                   annualLeave: values.annualLeave,
                   overTime: values.overTime,
                   image: "/assets/images/cutie.jpg",
-                })
-                )
+                }))
+                alert("Thêm nhân viên thành công")
+              setOpenModal(false);
+              
             }}
           >
             {(formik) => (
@@ -128,12 +124,9 @@ function StaffList(props) {
 
   function search(e) {
     e.preventDefault();
-    const search = e.target.value.toLowerCase();
-    let staffs = props.staffs.filter((staff) => {
-      return staff.name.toLowerCase().includes(search);
-    });
-
-    props.staffs = staffs;
+    dispatch(
+      rootReducer.actions.search(e.target.value)
+    )
   }
 
   return (
@@ -157,7 +150,7 @@ function StaffList(props) {
           />
         </Collapse>
       </Navbar>
-      <div className="row">{staffs}</div>
+      <div className="row">{staff}</div>
     </>
   );
 }

@@ -6,13 +6,16 @@ export default createSlice({
     initialState: {
         staffs: STAFFS,
         departments: DEPARTMENTS,
-        columns: "col-sm-4",
+        search:'',
 
     },
     reducers: {
         addStaff: (state, action) => {
             state.staffs.push(action.payload);
         },//action creator
+        search: (state, action) => {
+            state.search =action.payload
+        }
         
     }
 })
