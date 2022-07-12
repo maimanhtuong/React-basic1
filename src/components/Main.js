@@ -26,10 +26,11 @@ function Main() {
   
     const StaffWithId = () => {
       const Id = useParams().id;
+      
       return (
         <StaffDetail
           staff={
-            STAFFS.filter((staff) => staff.id == parseInt(Id))[0]
+            STAFFS.filter((staff) => staff.id === parseInt(Id))
           }
         />
       );

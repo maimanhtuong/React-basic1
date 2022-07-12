@@ -14,8 +14,11 @@ import * as Yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
 import { TextField, SelectField, DateField } from "./ListField";
 import rootReducer from "../../redux/rootReducer";
+import { staffsSelector,searchSelector } from "../../redux/selector";
+
 
 function StaffList(props) {
+  const staffLength= (useSelector(staffsSelector)).length;
   const [openModal, setOpenModal] = useState(false);
   
   const dispatch = useDispatch();
@@ -71,20 +74,23 @@ function StaffList(props) {
               doB: "",
               salaryScale: 1,
               startDate: "",
-              department: {id: 'Dept01', name: 'Sale', numberOfStaff: 1},
+              department: 
+                "{\"id\":\"Dept01\",\"name\":\"Sale\",\"numberOfStaff\":1}"
+              ,
               annualLeave: 0,
               overTime: 0,
             }}
             validationSchema={validationSchema}
             onSubmit={(values) => {
+              console.log(values);
               dispatch(
                 rootReducer.actions.addStaff({
-                  id: props.staffs.length + 1,
+                  id: staffLength + 1,
                   name: values.name,
                   doB: values.doB,
                   salaryScale: values.salaryScale,
                   startDate:values.startDate ,
-                  department: (values.department),
+                  department: JSON.parse(values.department),
                   annualLeave: values.annualLeave,
                   overTime: values.overTime,
                   image: "/assets/images/cutie.jpg",
@@ -146,6 +152,7 @@ function StaffList(props) {
             type="text"
             placeholder="Tìm kiếm nhân viên"
             className="form-control"
+            value={useSelector(searchSelector)}
             onChange={search}
           />
         </Collapse>
