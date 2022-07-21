@@ -11,7 +11,6 @@ export const Dishes = (
   switch (action.type) {
     case ActionType.ADD_DISHES:
         return { ...state, isLoading: false, errMess: null, dishes: action.payload };
-
     case ActionType.DISHES_LOADING:
       return { ...state, isLoading: true, errMess: null, dishes: [] };
     case ActionType.DISHES_FAILED:
