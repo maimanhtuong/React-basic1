@@ -58,12 +58,25 @@ export const addDishes = (dishes) => ({
 
 
 //COMMENTS
-export const fetchComments = () =>(dispatch) =>{
-    console.log(fetch(baseUrl+'comments').then(res=>res.json()))
+export const fetchComments = () => (dispatch) => {    
     return fetch(baseUrl + 'comments')
-            .then(res => res.json())
-            .then(comments => dispatch(addComments(comments)))
-}
+    .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          var error = new Error('Error ' + response.status + ': ' + response.statusText);
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+      })
+    .then(response => response.json())
+    .then(comments => dispatch(addComments(comments)))
+    .catch(error => dispatch(commentsFailed(error.message)));
+};
 
 export const commentsFailed = (errmess) =>({
     typye: ActionTypes.COMMENTS_FAILED,
