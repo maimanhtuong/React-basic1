@@ -37,16 +37,19 @@ class CommentForm extends Component {
     this.state = {
       isModalOpen: false,
     };
+
   }
 
+  
   toggleModal() {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
     });
   }
   handleSubmit(values) {
+    console.log(values)
     this.toggleModal();
-    this.props.addComment(
+    this.props.postComment(
       this.props.dishId,
       values.rating,
       values.author,
@@ -150,7 +153,7 @@ function RenderDish({ dish }) {
   else return <div></div>;
 }
 
-function RenderComments({ comments, addComment, dishId }) {
+function RenderComments({ comments, postComment, dishId }) {
   if (comments == null) {
     console.log("No comments");
     return <div></div>;
@@ -173,7 +176,7 @@ function RenderComments({ comments, addComment, dishId }) {
       <div>
         <h4>Comments</h4>
         <ListGroup className="list-unstyled">{cmt}</ListGroup>
-        <CommentForm dishId={dishId} addComment={addComment}></CommentForm>
+        <CommentForm dishId={dishId} postComment={postComment}></CommentForm>
       </div>
     );
   }
@@ -220,7 +223,7 @@ const DishDetail = (props) => {
         <div className="col-12 col-md-5 m-1">
           <RenderComments
             comments={props.comments}
-            addComment={props.addComment}
+            postComment={props.postComment}
             dishId={props.dish.id}
           />
         </div>
