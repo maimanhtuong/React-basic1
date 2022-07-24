@@ -23,6 +23,8 @@ import {
 import { Control, LocalForm, Errors } from "react-redux-form";
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from '../shared/baseUrl'
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
+
 
 const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => val && val.length >= len;
@@ -142,6 +144,11 @@ class CommentForm extends Component {
 function RenderDish({ dish }) {
   if (dish != null)
     return (
+      <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
       <Card>
         <CardImg top width="100%" src={baseUrl+'/assets/'+dish.image} alt={dish.name} />
         <CardBody>
@@ -149,6 +156,7 @@ function RenderDish({ dish }) {
           <CardText>{dish.description}</CardText>
         </CardBody>
       </Card>
+      </FadeTransform>
     );
   else return <div></div>;
 }
@@ -160,6 +168,7 @@ function RenderComments({ comments, postComment, dishId }) {
   } else {
     const cmt = comments.map((comment) => {
       return (
+          <Fade in>
         <ListGroupItem className="border-0" key={comment.id}>
           {comment.comment} <br />
           -- {comment.author},{" "}
@@ -169,13 +178,19 @@ function RenderComments({ comments, postComment, dishId }) {
             day: "2-digit",
           }).format(new Date(Date.parse(comment.date)))}
         </ListGroupItem>
+        </Fade>
       );
     });
 
     return (
       <div>
         <h4>Comments</h4>
-        <ListGroup className="list-unstyled">{cmt}</ListGroup>
+        <ListGroup className="list-unstyled">
+         <Stagger in>
+          {cmt}
+      </Stagger>
+          
+          </ListGroup>
         <CommentForm dishId={dishId} postComment={postComment}></CommentForm>
       </div>
     );

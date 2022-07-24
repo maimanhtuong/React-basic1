@@ -1,6 +1,5 @@
 import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
-import dateFormat from 'dateformat';
 
 export const addComment = (comment) => ({
   type: ActionTypes.ADD_COMMENT,
