@@ -14,11 +14,10 @@ import * as Yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
 import { TextField, SelectField, DateField } from "./ListField";
 import rootReducer from "../../redux/rootReducer";
-import { staffsSelector,searchSelector } from "../../redux/selector";
 
 
 function StaffList(props) {
-  const staffLength= (useSelector(staffsSelector)).length;
+  const staffLength= props.staffs.length;
   const [openModal, setOpenModal] = useState(false);
   
   const dispatch = useDispatch();
@@ -152,7 +151,7 @@ function StaffList(props) {
             type="text"
             placeholder="Tìm kiếm nhân viên"
             className="form-control"
-            value={useSelector(searchSelector)}
+            value={''}
             onChange={search}
           />
         </Collapse>

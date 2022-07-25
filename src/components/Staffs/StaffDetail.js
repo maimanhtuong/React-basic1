@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   CardTitle,
   CardBody,
@@ -10,10 +10,8 @@ import {Link} from 'react-router-dom'
 import dateFormat from "dateformat";
 
 function StaffDetail(props){
-  const a=[props.staff[0].name,props.staff[0].image,props.staff[0].doB,props.staff[0].startDate,props.staff[0].department.name,
-  props.staff[0].annualLeave,props.staff[0].overTime,props.staff[0].salaryScale
-];
-  console.log(a);
+  const  [LocalStaff,setLocalStaff] = useState(props.staff[0])
+  console.log(LocalStaff)
 return (
   <>
     <div>
@@ -21,28 +19,28 @@ return (
             <BreadcrumbItem>
               <Link to="/">Nhân viên</Link>
             </BreadcrumbItem>
-            <BreadcrumbItem active>{a[0]}</BreadcrumbItem>
+            <BreadcrumbItem active>{LocalStaff.name}</BreadcrumbItem>
           </Breadcrumb>
     </div>
     <div className="row">
     <div className='col-4'>
-  <CardImg src={a[1]} width="200px" height="300px"/>
+  <CardImg src={LocalStaff.image} width="200px" height="300px"/>
   </div>
   <div className="col-8">
   <CardBody>
     <CardTitle>
-      Họ và tên: <h3>{a[0]}</h3>
+      Họ và tên: <h3>{LocalStaff.name}</h3>
     </CardTitle>
     <CardTitle>
-      Ngày sinh: {dateFormat(a[2], "dd,mm,yyyy")}
+      Ngày sinh: {dateFormat(LocalStaff.doB, "dd,mm,yyyy")}
     </CardTitle>
     <CardTitle>
-      Ngày vào công ty: {dateFormat(a[3], "dd,mm,yyyy")}
+      Ngày vào công ty: {dateFormat(LocalStaff.startDate, "dd,mm,yyyy")}
     </CardTitle>
-    <CardTitle>Phòng ban: {a[4]}</CardTitle>
-    <CardTitle>Hệ số lương: {a[7]}</CardTitle>
-    <CardTitle>Số ngày nghĩ còn lại: {a[5]}</CardTitle>
-    <CardTitle>Số ngày đã làm thêm: {a[6]}</CardTitle>
+    <CardTitle>Phòng ban: {LocalStaff.departmentId}</CardTitle>
+    <CardTitle>Hệ số lương: {LocalStaff.salaryScale}</CardTitle>
+    <CardTitle>Số ngày nghĩ còn lại: {LocalStaff.annualLeave}</CardTitle>
+    <CardTitle>Số ngày đã làm thêm: {LocalStaff.overTime}</CardTitle>
   </CardBody>
   </div>
 </div>

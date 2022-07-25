@@ -1,41 +1,112 @@
-import { Routes, Route, Navigate, useParams } from "react-router-dom";
-import React, { useState } from "react";
+import { Routes, Route, Navigate, useParams, useNavigate } from "react-router-dom";
+import React, { Component,useEffect, useState } from "react";
+import { connect,useDispatch } from "react-redux";
 
 import Header from "./layout/Header";
 import StaffList from "./Staffs/StaffList";
 import StaffDetail from "./Staffs/StaffDetail"
+import StaffOfDepartment from "./Department/StaffOfDepartment"
 import DepartmentList from "./Department/DepartmentList";
 import SalaryList from "./Salary/SalaryList";
 import Footer from "./layout/Footer";
-
-import { useSelector} from "react-redux";
-import { staffsSelector,departmentSelector, searchSelector, staffsRemainingSelector} from '../redux/selector'
+import { fetchStaffs,fetchDepartments,fetchSalary,fetchStaffsDe } from '../redux/actionCreator'
 
 
-function Main() {
+
+
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{  navigate, params }} />;
+  }
+
+  return ComponentWithRouterProp;
+}
+
+//selector from state redux store
+const mapStateToProps = (state) => {
+  return {
+    staffs: state.staffs,
+    departments: state.departments.departments,
+    salary: state.salary,
+    staffsDe: state.departments.staffsDe
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+ 
+  fetchStaffs: () => {
+    dispatch(fetchStaffs());
+  },
+  fetchDepartments: () => {
+    dispatch(fetchDepartments());
+  },
+  fetchSalary: () => {
+    dispatch(fetchSalary());
+  },
+  fetchStaffsDe: (idDe) => {
+    console.log(idDe)
+    dispatch(fetchStaffsDe(idDe))
+  }
+  
+  
+});
+
+const StaffWithDepartmentId = (props) => {
+  const [flag,setFlag]=useState(props.flag) 
+  const dispatch = useDispatch()
+  const idDe = (useParams().idDe);
+  // dispatch(fetchStaffsDe(idDe))
+
+  
+    // Your code here
+    // console.log('useEffect')
+    if(flag){
+    dispatch(fetchStaffsDe(idDe))
+    setFlag(false)
+    }
+    // this.props.fetchStaffsDe(idDe);
+  
+  
+  return (
+    <StaffOfDepartment
+      staffsDe={
+        props.staffsDe
+      }
+    />
+  );
+};
+
+class Main extends Component {
   
   // const STORE = useSelector((state) => state.store);
   // const [staffs,setStaff] = useState(STORE.staffs);
   
   // const [departments,setDepartment] = useState(STORE.departments);
 
-  const STAFFS = useSelector(staffsRemainingSelector);
-  const DEPARTMENTS = useSelector(departmentSelector);
+  componentDidMount() {
+    this.props.fetchStaffs();
+    this.props.fetchDepartments();
+    this.props.fetchSalary();
 
- 
+  }
   
+ 
+  render(){
     const StaffWithId = () => {
       const Id = useParams().id;
-      
       return (
         <StaffDetail
           staff={
-            STAFFS.filter((staff) => staff.id === parseInt(Id))
+            this.props.staffs.filter((staff) => staff.id === parseInt(Id))
           }
         />
       );
     };
+    
 
+//RETURN
     return (
       <>
         <div className="container">
@@ -44,16 +115,21 @@ function Main() {
             <Route
               exact
               path="StaffList"
-              element={<StaffList staffs={STAFFS} departments={DEPARTMENTS} />}
+              element={<StaffList staffs={this.props.staffs} departments={this.props.departments}  />}
             />
-            <Route path="StaffList/:id" element={<StaffWithId />} />
+            <Route path="StaffList/:id" 
+            element={<StaffWithId/>}
+             />
             <Route
               path="DepartmentList"
-              element={<DepartmentList staffs={DEPARTMENTS} />}
+              element={<DepartmentList departments={this.props.departments} />}
             />
+             <Route path="DepartmentList/:idDe" 
+            element={<StaffWithDepartmentId staffsDe={this.props.staffsDe} flag={true}/>}
+             />
             <Route
               path="SalaryList"
-              element={<SalaryList staffs={STAFFS} />}
+              element={<SalaryList salary={this.props.salary} />}
             />
             <Route path="*" element={<Navigate to="/StaffList" />} />
           </Routes>
@@ -62,6 +138,7 @@ function Main() {
       </>
     );
   }
+}
 
 
-export default Main;
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

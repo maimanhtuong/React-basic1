@@ -17,7 +17,7 @@ import {
 import dateFormat from "dateformat";
 
 function StaffList(props) {
-  const [LocalStaffs, setLocalStaffs] = useState(props.staffs);
+  const [LocalStaffs, setLocalStaffs] = useState(props.salary);
 
   function sortId(str) {
     if (str === "asc") {
@@ -49,7 +49,7 @@ function StaffList(props) {
           <CardTitle>
             Ngày vào công ty: {dateFormat(staff.startDate, "dd,mm,yyyy")}
           </CardTitle>
-          <CardTitle>Phòng ban: {staff.department.name}</CardTitle>
+          <CardTitle>Phòng ban: {staff.departmentId}</CardTitle>
           <CardTitle>Số ngày nghĩ còn lại: {staff.annualLeave}</CardTitle>
           <CardTitle>Số ngày đã làm thêm: {staff.overTime}</CardTitle>
           <br></br>
