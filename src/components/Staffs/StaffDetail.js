@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react";
 import {
+  Card,
   CardTitle,
   CardBody,
   CardImg,
@@ -8,13 +9,16 @@ import {
 } from "reactstrap";
 import {Link} from 'react-router-dom'
 import dateFormat from "dateformat";
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function StaffDetail(props){
   const  [LocalStaff,setLocalStaff] = useState(props.staff[0])
   console.log(LocalStaff)
 return (
+  
   <>
     <div>
+    
     <Breadcrumb>
             <BreadcrumbItem>
               <Link to="/">Nhân viên</Link>
@@ -22,9 +26,17 @@ return (
             <BreadcrumbItem active>{LocalStaff.name}</BreadcrumbItem>
           </Breadcrumb>
     </div>
+
+    
     <div className="row">
     <div className='col-4'>
+    <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}> 
   <CardImg src={LocalStaff.image} width="200px" height="300px"/>
+  </FadeTransform>
   </div>
   <div className="col-8">
   <CardBody>
@@ -43,8 +55,10 @@ return (
     <CardTitle>Số ngày đã làm thêm: {LocalStaff.overTime}</CardTitle>
   </CardBody>
   </div>
+
 </div>
-  </>
+</>
+
 )
 }
 export default StaffDetail;

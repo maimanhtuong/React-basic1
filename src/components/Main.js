@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useParams, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate, useParams, useNavigate, useLocation } from "react-router-dom";
 import React, { Component,useEffect, useState } from "react";
 import { connect,useDispatch } from "react-redux";
 
@@ -10,15 +10,17 @@ import DepartmentList from "./Department/DepartmentList";
 import SalaryList from "./Salary/SalaryList";
 import Footer from "./layout/Footer";
 import { fetchStaffs,fetchDepartments,fetchSalary,fetchStaffsDe } from '../redux/actionCreator'
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
 
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
+    let location = useLocation()
     let navigate = useNavigate();
     let params = useParams();
-    return <Component {...props} router={{  navigate, params }} />;
+    return <Component {...props} router={{  navigate, params, location }} />;
   }
 
   return ComponentWithRouterProp;
@@ -111,7 +113,11 @@ class Main extends Component {
       <>
         <div className="container">
           <Header />
-          <Routes>
+          <TransitionGroup>
+          <CSSTransition
+           in={true} timeout={500} classNames="my-node"
+          >
+          <Routes location={this.props.location}>
             <Route
               exact
               path="StaffList"
@@ -133,6 +139,8 @@ class Main extends Component {
             />
             <Route path="*" element={<Navigate to="/StaffList" />} />
           </Routes>
+          </CSSTransition>
+          </TransitionGroup>
           <Footer />
         </div>
       </>

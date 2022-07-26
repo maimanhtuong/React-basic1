@@ -13,30 +13,27 @@ import Modal from "react-modal";
 import * as Yup from "yup";
 import { TextField, SelectField, DateField, NumField } from "./ListField";
 import { useDispatch } from "react-redux";
-import { addNewStaff, deleteStaff, editStaff } from '../../redux/actionCreator'
+import { addNewStaff, deleteStaff, editStaff } from "../../redux/actionCreator";
 // import FormStaffEdit from "./FormEdit";
+import { FadeTransform } from "react-animation-components";
 
 function StaffList(props) {
-  const staffLength= props.staffs.length;
+  const staffLength = props.staffs.length;
   const [openModal, setOpenModal] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
-  
+
   const dispatch = useDispatch();
- 
- 
-  
+
   // const deleteStaff = (staffId)=>{
   // if(window.confirm("Are you sure delete this staff?")){
   //   dispatch(deleteStaff(staffId))
   // }
   // }
 
-  
   const validationSchema = Yup.object({
     name: Yup.string().max(15, "Must be 15 characters or less").required(),
     doB: Yup.date().required(),
     startDate: Yup.date().required(),
-
   });
 
   //FORM ADD STAFF
@@ -71,9 +68,7 @@ function StaffList(props) {
               doB: "",
               salaryScale: 1,
               startDate: "",
-              department: 
-                "{\"id\":\"Dept01\",\"name\":\"Sale\",\"numberOfStaff\":1}"
-              ,
+              department: '{"id":"Dept01","name":"Sale","numberOfStaff":1}',
               annualLeave: 0,
               overTime: 0,
             }}
@@ -81,20 +76,20 @@ function StaffList(props) {
             onSubmit={(values) => {
               console.log(values);
               dispatch(
-               addNewStaff({
+                addNewStaff({
                   id: staffLength + 1,
                   name: values.name,
                   doB: values.doB,
                   salaryScale: values.salaryScale,
-                  startDate:values.startDate ,
+                  startDate: values.startDate,
                   department: JSON.parse(values.department),
                   annualLeave: values.annualLeave,
                   overTime: values.overTime,
                   image: "/assets/images/cutie.jpg",
-                }))
-                alert("Thêm nhân viên thành công")
+                })
+              );
+              alert("Thêm nhân viên thành công");
               setOpenModal(false);
-              
             }}
           >
             {(formik) => (
@@ -105,7 +100,10 @@ function StaffList(props) {
                 <SelectField name="department">
                   {props.departments.map((department) => {
                     return (
-                      <option key={department.id} value={JSON.stringify(department)}>
+                      <option
+                        key={department.id}
+                        value={JSON.stringify(department)}
+                      >
                         {department.name}
                       </option>
                     );
@@ -158,9 +156,7 @@ function StaffList(props) {
               doB: props.staff.doB,
               salaryScale: props.staff.salaryScale,
               startDate: props.staff.startDate,
-              departmentId: 
-                (props.staff.departmentId)
-              ,
+              departmentId: props.staff.departmentId,
               annualLeave: props.staff.annualLeave,
               overTime: props.staff.overTime,
             }}
@@ -168,31 +164,31 @@ function StaffList(props) {
             onSubmit={(values) => {
               console.log(values);
               dispatch(
-               editStaff({
-                  id:  values.id,
+                editStaff({
+                  id: values.id,
                   name: values.name,
                   doB: values.doB,
                   salaryScale: values.salaryScale,
-                  startDate:values.startDate ,
-                  departmentId: (values.departmentId),
+                  startDate: values.startDate,
+                  departmentId: values.departmentId,
                   annualLeave: values.annualLeave,
                   overTime: values.overTime,
                   image: "/assets/images/cutie.jpg",
-                }))
-                alert("Sửa nhân viên thành công")
+                })
+              );
+              alert("Sửa nhân viên thành công");
               setOpenModalEdit(false);
-              
             }}
           >
             {(formik) => (
               <Form>
-props.                <TextField label="Tên" name="name" />
+                props. <TextField label="Tên" name="name" />
                 <DateField label="Ngày sinh" name="doB" />
                 <DateField label="Ngày vào công ty" name="startDate" />
                 <SelectField name="departmentId">
                   {props.departments.map((department) => {
                     return (
-                      <option key={department.id} value={department.id} >
+                      <option key={department.id} value={department.id}>
                         {department.id}
                       </option>
                     );
@@ -220,26 +216,42 @@ props.                <TextField label="Tên" name="name" />
   // }
   const staff = props.staffs.map((staff) => {
     return (
-
-      <Card key={staff.id} className="col-sm-4">
-        <Link to={`${staff.id}`}>
-          <CardBody>
-            <CardImg src={staff.image} height="300px"></CardImg>
-            <CardTitle tag="h5">{staff.name}</CardTitle>
-          </CardBody>
-        </Link>
-        <button className="btn btn-danger" onClick={()=>{if(window.confirm('Are you sure delete this staff?')){dispatch(deleteStaff(staff.id))};}}>Delete</button>
-        <button className="btn btn-info" onClick={()=>setOpenModalEdit(true)}>Edit</button>
-        {openModalEdit && <FormStaffEdit staff={staff} departments={props.departments}/>}
-
-      </Card>
+      
+        <Card key={staff.id} className="col-sm-4">
+          <Link to={`${staff.id}`}>
+            <CardBody>
+              <CardImg src={staff.image} height="300px"></CardImg>
+              <CardTitle tag="h5">{staff.name}</CardTitle>
+            </CardBody>
+          </Link>
+          <div className="row">
+          <button
+            className="btn btn-danger ml-5"
+            onClick={() => {
+              if (window.confirm("Are you sure delete this staff?")) {
+                dispatch(deleteStaff(staff.id));
+              }
+            }}
+          >
+            Delete
+          </button>
+          <button
+            className="btn btn-info ml-3"
+            onClick={() => setOpenModalEdit(true)}
+          >
+            Edit
+          </button>
+          </div>
+          {openModalEdit && (
+            <FormStaffEdit staff={staff} departments={props.departments} />
+          )}
+        </Card>
     );
   });
   return (
     <>
       <Navbar color="info" expand="md" light>
         <Collapse navbar>
-         
           <button
             className="btn btn-danger mx-5"
             onClick={() => setOpenModal(true)}
@@ -252,12 +264,21 @@ props.                <TextField label="Tên" name="name" />
             type="text"
             placeholder="Tìm kiếm nhân viên"
             className="form-control"
-            value={''}
+            value={""}
             // onChange={search}
           />
         </Collapse>
       </Navbar>
-      <div className="row">{staff}</div>
+      <FadeTransform
+        in
+        transformProps={{
+          exitTransform: "scale(0.5) translateY(-50%)",
+        }}
+      >
+        <div className="row">
+        {staff}
+        </div>
+        </FadeTransform>
     </>
   );
 }
