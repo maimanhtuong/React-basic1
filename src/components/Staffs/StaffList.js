@@ -11,37 +11,35 @@ import {
 import { Formik, Form } from "formik";
 import Modal from "react-modal";
 import * as Yup from "yup";
-import { useSelector, useDispatch } from "react-redux";
-import { TextField, SelectField, DateField } from "./ListField";
-import rootReducer from "../../redux/rootReducer";
-
+import { TextField, SelectField, DateField, NumField } from "./ListField";
+import { useDispatch } from "react-redux";
+import { addNewStaff, deleteStaff, editStaff } from '../../redux/actionCreator'
+// import FormStaffEdit from "./FormEdit";
 
 function StaffList(props) {
   const staffLength= props.staffs.length;
   const [openModal, setOpenModal] = useState(false);
+  const [openModalEdit, setOpenModalEdit] = useState(false);
   
   const dispatch = useDispatch();
  
  
-  const staff = props.staffs.map((staff) => {
-    return (
-      <Card key={staff.id} className="col-sm-4">
-        <Link to={`${staff.id}`}>
-          <CardBody>
-            <CardImg src={staff.image} height="300px"></CardImg>
-            <CardTitle tag="h5">{staff.name}</CardTitle>
-          </CardBody>
-        </Link>
-      </Card>
-    );
-  });
+  
+  // const deleteStaff = (staffId)=>{
+  // if(window.confirm("Are you sure delete this staff?")){
+  //   dispatch(deleteStaff(staffId))
+  // }
+  // }
 
+  
   const validationSchema = Yup.object({
     name: Yup.string().max(15, "Must be 15 characters or less").required(),
     doB: Yup.date().required(),
     startDate: Yup.date().required(),
 
   });
+
+  //FORM ADD STAFF
   const FormStaff = () => {
     return (
       <div className="container w-50">
@@ -83,7 +81,7 @@ function StaffList(props) {
             onSubmit={(values) => {
               console.log(values);
               dispatch(
-                rootReducer.actions.addStaff({
+               addNewStaff({
                   id: staffLength + 1,
                   name: values.name,
                   doB: values.doB,
@@ -127,13 +125,116 @@ function StaffList(props) {
     );
   };
 
-  function search(e) {
-    e.preventDefault();
-    dispatch(
-      rootReducer.actions.search(e.target.value)
-    )
-  }
+  //FORM EDIT STAFF
+  const FormStaffEdit = (props) => {
+    return (
+      <div className="container w-50">
+        <Modal
+          isOpen={openModalEdit}
+          style={{
+            content: {
+              top: "50%",
+              left: "50%",
+              right: "auto",
+              bottom: "auto",
+              marginRight: "-50%",
+              transform: "translate(-50%, -50%)",
+            },
+          }}
+        >
+          <button
+            onClick={() => {
+              setOpenModalEdit(false);
+            }}
+            className="btn btn-danger"
+          >
+            X
+          </button>
+          <h1>Edit Staff Form?</h1>
+          <Formik
+            initialValues={{
+              id: props.staff.id,
+              name: props.staff.name,
+              doB: props.staff.doB,
+              salaryScale: props.staff.salaryScale,
+              startDate: props.staff.startDate,
+              departmentId: 
+                (props.staff.departmentId)
+              ,
+              annualLeave: props.staff.annualLeave,
+              overTime: props.staff.overTime,
+            }}
+            validationSchema={validationSchema}
+            onSubmit={(values) => {
+              console.log(values);
+              dispatch(
+               editStaff({
+                  id:  values.id,
+                  name: values.name,
+                  doB: values.doB,
+                  salaryScale: values.salaryScale,
+                  startDate:values.startDate ,
+                  departmentId: (values.departmentId),
+                  annualLeave: values.annualLeave,
+                  overTime: values.overTime,
+                  image: "/assets/images/cutie.jpg",
+                }))
+                alert("Sửa nhân viên thành công")
+              setOpenModalEdit(false);
+              
+            }}
+          >
+            {(formik) => (
+              <Form>
+props.                <TextField label="Tên" name="name" />
+                <DateField label="Ngày sinh" name="doB" />
+                <DateField label="Ngày vào công ty" name="startDate" />
+                <SelectField name="departmentId">
+                  {props.departments.map((department) => {
+                    return (
+                      <option key={department.id} value={department.id} >
+                        {department.id}
+                      </option>
+                    );
+                  })}
+                </SelectField>
+                <TextField label="Hệ số lương" name="salaryScale" />
+                <TextField label="Số ngày nghỉ còn lại" name="annualLeave" />
+                <TextField label="Số ngày đã làm thêm" name="overTime" />
+                <button className="btn btn-dark mt-3" type="submit">
+                  Add
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </Modal>
+      </div>
+    );
+  };
 
+  // function search(e) {
+  //   e.preventDefault();
+  //   dispatch(
+  //     rootReducer.actions.search(e.target.value)
+  //   )
+  // }
+  const staff = props.staffs.map((staff) => {
+    return (
+
+      <Card key={staff.id} className="col-sm-4">
+        <Link to={`${staff.id}`}>
+          <CardBody>
+            <CardImg src={staff.image} height="300px"></CardImg>
+            <CardTitle tag="h5">{staff.name}</CardTitle>
+          </CardBody>
+        </Link>
+        <button className="btn btn-danger" onClick={()=>{if(window.confirm('Are you sure delete this staff?')){dispatch(deleteStaff(staff.id))};}}>Delete</button>
+        <button className="btn btn-info" onClick={()=>setOpenModalEdit(true)}>Edit</button>
+        {openModalEdit && <FormStaffEdit staff={staff} departments={props.departments}/>}
+
+      </Card>
+    );
+  });
   return (
     <>
       <Navbar color="info" expand="md" light>
@@ -152,7 +253,7 @@ function StaffList(props) {
             placeholder="Tìm kiếm nhân viên"
             className="form-control"
             value={''}
-            onChange={search}
+            // onChange={search}
           />
         </Collapse>
       </Navbar>
