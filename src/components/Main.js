@@ -47,10 +47,10 @@ const mapDispatchToProps = (dispatch) => ({
   fetchSalary: () => {
     dispatch(fetchSalary());
   },
-  fetchStaffsDe: (idDe) => {
-    console.log(idDe)
-    dispatch(fetchStaffsDe(idDe))
-  }
+  // fetchStaffsDe: (idDe) => {
+  //   console.log(idDe)
+  //   dispatch(fetchStaffsDe(idDe))
+  // }
   
   
 });
@@ -60,17 +60,11 @@ const StaffWithDepartmentId = (props) => {
   const dispatch = useDispatch()
   const idDe = (useParams().idDe);
   // dispatch(fetchStaffsDe(idDe))
-
-  
-    // Your code here
     // console.log('useEffect')
     if(flag){
     dispatch(fetchStaffsDe(idDe))
     setFlag(false)
     }
-    // this.props.fetchStaffsDe(idDe);
-  
-  
   return (
     <StaffOfDepartment
       staffsDe={

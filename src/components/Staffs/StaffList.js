@@ -24,11 +24,7 @@ function StaffList(props) {
 
   const dispatch = useDispatch();
 
-  // const deleteStaff = (staffId)=>{
-  // if(window.confirm("Are you sure delete this staff?")){
-  //   dispatch(deleteStaff(staffId))
-  // }
-  // }
+  
 
   const validationSchema = Yup.object({
     name: Yup.string().max(15, "Must be 15 characters or less").required(),
@@ -214,17 +210,18 @@ function StaffList(props) {
   //     rootReducer.actions.search(e.target.value)
   //   )
   // }
+
+  //STAFF
   const staff = props.staffs.map((staff) => {
     return (
-      
-        <Card key={staff.id} className="col-sm-4">
-          <Link to={`${staff.id}`}>
-            <CardBody>
-              <CardImg src={staff.image} height="300px"></CardImg>
-              <CardTitle tag="h5">{staff.name}</CardTitle>
-            </CardBody>
-          </Link>
-          <div className="row">
+      <Card key={staff.id} className="col-sm-4">
+        <Link to={`${staff.id}`}>
+          <CardBody>
+            <CardImg src={staff.image} height="300px"></CardImg>
+            <CardTitle tag="h5">{staff.name}</CardTitle>
+          </CardBody>
+        </Link>
+        <div className="row ml-5">
           <button
             className="btn btn-danger ml-5"
             onClick={() => {
@@ -236,16 +233,16 @@ function StaffList(props) {
             Delete
           </button>
           <button
-            className="btn btn-info ml-3"
+            className="btn btn-info ml-5"
             onClick={() => setOpenModalEdit(true)}
           >
             Edit
           </button>
-          </div>
-          {openModalEdit && (
-            <FormStaffEdit staff={staff} departments={props.departments} />
-          )}
-        </Card>
+        </div>
+        {openModalEdit && (
+          <FormStaffEdit staff={staff} departments={props.departments} />
+        )}
+      </Card>
     );
   });
   return (
@@ -256,17 +253,11 @@ function StaffList(props) {
             className="btn btn-danger mx-5"
             onClick={() => setOpenModal(true)}
           >
-            +
+           Thêm nhân viên +
           </button>
           {openModal && <FormStaff />}
 
-          <input
-            type="text"
-            placeholder="Tìm kiếm nhân viên"
-            className="form-control"
-            value={""}
-            // onChange={search}
-          />
+          
         </Collapse>
       </Navbar>
       <FadeTransform
@@ -275,10 +266,8 @@ function StaffList(props) {
           exitTransform: "scale(0.5) translateY(-50%)",
         }}
       >
-        <div className="row">
-        {staff}
-        </div>
-        </FadeTransform>
+        <div className="row">{staff}</div>
+      </FadeTransform>
     </>
   );
 }
